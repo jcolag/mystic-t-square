@@ -1,0 +1,10 @@
+{
+  "name": "mystic-t-square",
+  "version": "1.0.0",
+  "description": "A composite game",
+  "main": "game.js",
+  "repository": "git@github.com:jcolag/mystic-t-square.git",
+  "author": "John Colagioia <john@colagioia.net>",
+  "license": "AGPL-3.0-or-later",
+  "private": false
+}
