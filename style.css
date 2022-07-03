@@ -16,4 +16,9 @@ body {
   text-align: center;
 }
 
+td {
+  background-color: var(--foreground);
+  height: 30vh;
+  width: 30vh;
+}
 
