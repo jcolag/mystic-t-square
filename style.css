@@ -2,15 +2,13 @@
   --background: #7dacc5;
   --neutral: #f1ebd9;
   --foreground: #49281b;
-  --good: #7dc596;
-  --ok:  #c5ba7d;
-  --bad: #c4d9e5;
-  --error: #aa4c5a;
 }
 
 body {
   background-color: var(--background);
-  display: grid;
+  color: var(--foreground);
+  display: flex;
+  flex-direction: row;
   font-size: 1.25em;
   justify-content: center;
   text-align: center;
@@ -18,7 +16,10 @@ body {
 
 td {
   background-color: var(--foreground);
+  border-radius: 3vh;
+  font-size: 3em;
   height: 30vh;
+  user-select: none;
   width: 30vh;
 }
 
