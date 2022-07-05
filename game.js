@@ -1,4 +1,8 @@
-questions = {};
+const faceNo = '🙅';
+const faceYes = '🙆';
+const zwj = '\u200D';
+let questions = {};
+let answering = null;
 
 window.addEventListener('load', (e) => {
   getQuestions(8);
@@ -16,5 +20,11 @@ function getQuestions (n) {
   }
   
   questions = JSON.parse(request.responseText);
+}
+
+function makeFace(type) {
+  const face = type === 'O' ? faceYes : faceNo;
+
+  return face;
 }
 
