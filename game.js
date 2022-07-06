@@ -22,6 +22,14 @@ function getQuestions (n) {
   questions = JSON.parse(request.responseText);
 }
 
+function unescape(input) {
+  const doc = new DOMParser()
+    .parseFromString(input, "text/html");
+
+  return doc.documentElement.textContent;
+}
+
+function checkWin(onWin) {
 function makeFace(type) {
   const face = type === 'O' ? faceYes : faceNo;
 
