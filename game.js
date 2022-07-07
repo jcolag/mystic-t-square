@@ -1,6 +1,7 @@
 const faceNo = '🙅';
 const faceYes = '🙆';
 const zwj = '\u200D';
+let questionIndex = 0;
 let questions = {};
 let answering = null;
 
@@ -50,6 +51,10 @@ function handleCellClick(event) {
       panel.appendChild(answer);
     });
   trivia.appendChild(panel);
+  questionIndex++;
+}
+
+function handleAnswerClick(event) {
 }
 
 function unescape(input) {
