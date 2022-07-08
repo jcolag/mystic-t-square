@@ -55,6 +55,30 @@ function handleCellClick(event) {
 }
 
 function handleAnswerClick(event) {
+  const button = event.target;
+  const panel = button.parentNode;
+  const question = questions.results[panel.id];
+  const buttons = Array.from(panel.getElementsByTagName('button'));
+  const coord = answering.id.split('-');
+  let result;
+
+  if (button.innerHTML === unescape(question.correct_answer)) {
+    result = document.createTextNode(makeFace('O'));
+    map[coord[0]][coord[1]] = 'O';
+  } else {
+    result = document.createTextNode(makeFace('X'));
+    map[coord[0]][coord[1]] = 'X';
+  }
+  buttons.forEach((b) => {
+    b.disabled = true;
+    if (b.innerHTML === unescape(question.correct_answer)) {
+      b.classList.add('correct-answer');
+    }
+
+    if (b === button) {
+      b.classList.add('guessed-answer');
+    }
+  });
 }
 
 function unescape(input) {
