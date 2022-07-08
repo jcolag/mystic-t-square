@@ -26,6 +26,10 @@ function getQuestions (n) {
 }
 
 function handleCellClick(event) {
+  if (answering !== null) {
+    return;
+  }
+
   const trivia = document.getElementById('right-panel');
   const panel = document.createElement('div');
   const q = questions.results[questionIndex];
@@ -51,10 +55,15 @@ function handleCellClick(event) {
       panel.appendChild(answer);
     });
   trivia.appendChild(panel);
+  answering = event.target;
   questionIndex++;
 }
 
 function handleAnswerClick(event) {
+  if (answering === null) {
+    return;
+  }
+
   const button = event.target;
   const panel = button.parentNode;
   const question = questions.results[panel.id];
@@ -69,6 +78,8 @@ function handleAnswerClick(event) {
     result = document.createTextNode(makeFace('X'));
     map[coord[0]][coord[1]] = 'X';
   }
+  answering.appendChild(result);
+  answering.removeEventListener('click', handleCellClick);
   buttons.forEach((b) => {
     b.disabled = true;
     if (b.innerHTML === unescape(question.correct_answer)) {
@@ -79,6 +90,7 @@ function handleAnswerClick(event) {
       b.classList.add('guessed-answer');
     }
   });
+  answering = null;
 }
 
 function unescape(input) {
