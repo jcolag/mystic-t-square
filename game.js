@@ -1,6 +1,9 @@
 const faceNo = '🙅';
 const faceYes = '🙆';
 const zwj = '\u200D';
+const skin = [ '🏻', '🏼', '🏽', '🏾', '🏿' ];
+const gender = [ '♀️', '♂️' ];
+const map = [[null,null,null],[null,null,null],[null,null,null]];
 let questionIndex = 0;
 let questions = {};
 let answering = null;
@@ -101,8 +104,13 @@ function unescape(input) {
 }
 
 function makeFace(type) {
+  const s = Math.floor(Math.random() * (skin.length + 1));
+  const g = Math.floor(Math.random() * (gender.length + 1));
   const face = type === 'O' ? faceYes : faceNo;
 
-  return face;
+  return face +
+    (s === skin.length ? '' : skin[s]) +
+    (g === gender.length ? '' : (zwj + gender[g])) +
+    '\uFE0F';
 }
 
