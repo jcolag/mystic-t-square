@@ -94,6 +94,7 @@ function handleAnswerClick(event) {
     }
   });
   answering = null;
+  checkWin();
 }
 
 function unescape(input) {
@@ -101,6 +102,41 @@ function unescape(input) {
     .parseFromString(input, "text/html");
 
   return doc.documentElement.textContent;
+}
+
+function checkWin() {
+  let found = [];
+
+  for (let i = 0; i < 3; i++) {
+    const row = map[i];
+    const col = map.map((r) => r[i]);
+
+    if (row[0] === row[1] && row[1] === row[2]) {
+      found.push(row[0]);
+    }
+
+    if (col[0] === col[1] && col[1] === col[2]) {
+      found.push(col[0]);
+    }
+  }
+
+  if (map[0][0] === map[1][1] && map[1][1] === map[2][2]) {
+    found.push(map[0][0]);
+  }
+
+  if (map[0][2] === map[1][1] && map[1][1] === map[2][0]) {
+    found.push(map[0][2]);
+  }
+
+  const result = found
+    .filter((x) => x !== null)
+    .filter((v, i, s) => s.indexOf(v) === i);
+
+  if (result.length > 0) {
+    winState(result, 'O');
+  }
+
+  return result;
 }
 
 function makeFace(type) {
