@@ -33,6 +33,15 @@ function handleCellClick(event) {
     return;
   }
 
+  askQuestion(event);
+}
+
+function askQuestion(event) {
+  if (event.target.innerHTML.length > 0) {
+    console.log(event.target.innerHTML.length);
+    return;
+  }
+
   const trivia = document.getElementById('right-panel');
   const panel = document.createElement('div');
   const q = questions.results[questionIndex];
@@ -60,6 +69,8 @@ function handleCellClick(event) {
   trivia.appendChild(panel);
   answering = event.target;
   questionIndex++;
+}
+
 }
 
 function handleAnswerClick(event) {
