@@ -9,9 +9,12 @@ let questions = {};
 let answering = null;
 
 window.addEventListener('load', (e) => {
+  const modal = document.getElementById('startup-modal');
+
   Array.from(document.getElementsByTagName('td'))
     .forEach((cell) => cell.addEventListener('click', handleCellClick));
   getQuestions(8);
+  modal.classList.add('hidden-modal');
 });
 
 function getQuestions (n) {
