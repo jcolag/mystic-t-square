@@ -7,6 +7,8 @@ const map = [[null,null,null],[null,null,null],[null,null,null]];
 let questionIndex = 0;
 let questions = {};
 let answering = null;
+let turn = -1;
+let playTurn = askQuestion;
 
 window.addEventListener('load', (e) => {
   const modal = document.getElementById('startup-modal');
@@ -14,6 +16,7 @@ window.addEventListener('load', (e) => {
   Array.from(document.getElementsByTagName('td'))
     .forEach((cell) => cell.addEventListener('click', handleCellClick));
   getQuestions(8);
+  nextTurn(true);
   modal.classList.add('hidden-modal');
 });
 
@@ -36,7 +39,7 @@ function handleCellClick(event) {
     return;
   }
 
-  askQuestion(event);
+  playTurn(event);
 }
 
 function askQuestion(event) {
@@ -72,8 +75,10 @@ function askQuestion(event) {
   trivia.appendChild(panel);
   answering = event.target;
   questionIndex++;
+  nextTurn(false);
 }
 
+function moveTile(event) {
 }
 
 function handleAnswerClick(event) {
@@ -108,7 +113,8 @@ function handleAnswerClick(event) {
     }
   });
   answering = null;
-  checkWin();
+  nextTurn(true);
+  checkWin(winState, loseState, 'O');
 }
 
 function unescape(input) {
@@ -118,7 +124,7 @@ function unescape(input) {
   return doc.documentElement.textContent;
 }
 
-function checkWin() {
+function checkWin(reportWin, reportTie, player) {
   let found = [];
 
   for (let i = 0; i < 3; i++) {
@@ -147,10 +153,16 @@ function checkWin() {
     .filter((v, i, s) => s.indexOf(v) === i);
 
   if (result.length > 0) {
-    winState(result, 'O');
+    reportWin(result, player);
   }
 
   return result;
+}
+
+function loseState() {
+}
+
+function winState(result, player) {
 }
 
 function makeFace(type) {
@@ -164,3 +176,15 @@ function makeFace(type) {
     '\uFE0F';
 }
 
+function nextTurn(changePlayer) {
+  const whoPlays = document.getElementById('who-plays');
+  if (changePlayer) {
+    turn++;
+    playTurn = turn % 2 === 0 ? askQuestion : moveTile;
+    whoPlays.innerHTML = turn % 2 === 0
+      ? `${faceYes} - Choose a square/question`
+      : `${faceNo} - Slide a tile into the empty space`;
+  } else {
+    whoPlays.innerHTML = `${faceYes} - Answer the question`;
+  }
+}
