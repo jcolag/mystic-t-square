@@ -3,7 +3,6 @@ const faceYes = '🙆';
 const zwj = '\u200D';
 const skin = [ '🏻', '🏼', '🏽', '🏾', '🏿' ];
 const gender = [ '♀️', '♂️' ];
-const map = [[null,null,null],[null,null,null],[null,null,null]];
 let questionIndex = 0;
 let questions = {};
 let answering = null;
@@ -95,13 +94,10 @@ function handleAnswerClick(event) {
 
   if (button.innerHTML === unescape(question.correct_answer)) {
     result = document.createTextNode(makeFace('O'));
-    map[coord[0]][coord[1]] = 'O';
   } else {
     result = document.createTextNode(makeFace('X'));
-    map[coord[0]][coord[1]] = 'X';
   }
   answering.appendChild(result);
-  answering.removeEventListener('click', handleCellClick);
   buttons.forEach((b) => {
     b.disabled = true;
     if (b.innerHTML === unescape(question.correct_answer)) {
