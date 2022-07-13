@@ -80,6 +80,69 @@ function askQuestion(event) {
 function moveTile(event) {
 }
 
+function findNode(id) {
+  const coord = {
+    x: -1,
+    y: -1,
+  };
+  let rowCount = -1;
+
+  const rows = Array
+    .from(
+      document.getElementById('game-board').getElementsByTagName('tr')
+    )
+    .forEach((tr) => {
+      let colCount = -1;
+
+      rowCount++;
+      Array
+        .from(tr.getElementsByTagName('td'))
+        .forEach((td) => {
+          colCount++;
+          if (td.id === id) {
+            coord.x = colCount;
+            coord.y = rowCount;
+          }
+        });
+    });
+  return coord;
+}
+
+function isNeighbor(coor) {
+  const emp = findNode('1-1');
+
+  return Math.abs(coor.x - emp.x) + Math.abs(coor.y - emp.y) !== 1;
+}
+
+function swapNodes(n1, n2) {
+  const p1 = n1.parentNode;
+  const p2 = n2.parentNode;
+  var i1, i2;
+
+  if (!p1 || !p2 || p1.isSameNode(n2) || p2.isSameNode(n1)) {
+    return;
+  }
+
+  for (var i = 0; i < p1.children.length; i++) {
+    if (p1.children[i].isSameNode(n1)) {
+      i1 = i;
+    }
+  }
+
+  for (var i = 0; i < p2.children.length; i++) {
+    if (p2.children[i].isSameNode(n2)) {
+      i2 = i;
+    }
+  }
+
+  if (p1.isSameNode(p2) && i1 < i2) {
+    i2++;
+  }
+
+  p1.insertBefore(n2, p1.children[i1]);
+  p2.insertBefore(n1, p2.children[i2]);
+}
+
 function handleAnswerClick(event) {
   if (answering === null) {
     return;
