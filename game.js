@@ -78,6 +78,19 @@ function askQuestion(event) {
 }
 
 function moveTile(event) {
+  const square = event.target;
+  const coord = findNode(square.id);
+  const emptySquare = document.getElementById('1-1');
+
+  if (isNeighbor(coord)) {
+    square.addEventListener('animationend', forgetAnimation);
+    square.classList.add('animate__animated', 'animate__headShake');
+    return;
+  }
+
+  swapNodes(square, emptySquare);
+  nextTurn(true);
+  checkWin(winState, loseState, 'O');
 }
 
 function findNode(id) {
