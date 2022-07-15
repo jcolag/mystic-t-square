@@ -198,7 +198,26 @@ function unescape(input) {
 
 function checkWin(reportWin, reportTie, player) {
   let found = [];
+  let empties = 0;
 
+  const rows = Array
+    .from(
+      document.getElementById('game-board').getElementsByTagName('tr')
+    )
+    .forEach((tr) => {
+      const row = [];
+
+      Array
+        .from(tr.getElementsByTagName('td'))
+        .forEach((td) => {
+          row.push(td.innerHTML);
+          if (td.innerHTML.length === 0) {
+            empties++;
+          }
+        });
+
+      map.push(row);
+    });
   for (let i = 0; i < 3; i++) {
     const row = map[i];
     const col = map.map((r) => r[i]);
@@ -221,11 +240,13 @@ function checkWin(reportWin, reportTie, player) {
   }
 
   const result = found
-    .filter((x) => x !== null)
+    .filter((x) => x !== null && x.length > 0)
     .filter((v, i, s) => s.indexOf(v) === i);
 
   if (result.length > 0) {
     reportWin(result, player);
+  } else if (empties === 0) {
+    reportTie();
   }
 
   return result;
@@ -250,6 +271,7 @@ function makeFace(type) {
 
 function nextTurn(changePlayer) {
   const whoPlays = document.getElementById('who-plays');
+
   if (changePlayer) {
     turn++;
     playTurn = turn % 2 === 0 ? askQuestion : moveTile;
