@@ -173,6 +173,7 @@ function handleAnswerClick(event) {
   } else {
     result = document.createTextNode(makeFace('X'));
   }
+
   answering.appendChild(result);
   buttons.forEach((b) => {
     b.disabled = true;
@@ -197,6 +198,12 @@ function unescape(input) {
 }
 
 function checkWin(reportWin, reportTie, player) {
+  const map = [];
+  const modifiers = [
+    ...skin,
+    ...gender,
+    zwj,
+  ];
   let found = [];
   let empties = 0;
 
@@ -215,6 +222,11 @@ function checkWin(reportWin, reportTie, player) {
             empties++;
           }
         });
+      for (let a = 0; a < 3; a++) {
+        for (let b = 0; b < modifiers.length; b++) {
+          row[a] = row[a].replace(modifiers[b], '');
+        }
+      }
 
       map.push(row);
     });
