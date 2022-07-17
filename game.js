@@ -265,6 +265,14 @@ function checkWin(reportWin, reportTie, player) {
 }
 
 function loseState() {
+  const whoPlays = document.getElementById('who-plays');
+  const trivia = document.getElementById('right-panel');
+  const panel = document.createElement('div');
+  const report = document.createTextNode('A tie!');
+
+  panel.appendChild(report);
+  trivia.appendChild(panel);
+  whoPlays.parentNode.removeChild(whoPlays);
 }
 
 function winState(result, player) {
