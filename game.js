@@ -268,6 +268,40 @@ function loseState() {
 }
 
 function winState(result, player) {
+  const which = result[0];
+  const whoPlays = document.getElementById('who-plays');
+  const trivia = document.getElementById('right-panel');
+  const panel = document.createElement('div');
+  const report = document.createTextNode(`${which} wins!`);
+  const modifiers = [
+    ...skin,
+    ...gender,
+    zwj,
+  ];
+
+  panel.appendChild(report);
+  trivia.appendChild(panel);
+  Array.from(
+      document.getElementById('game-board').getElementsByTagName('tr')
+    )
+    .forEach((tr) => {
+      Array
+        .from(tr.getElementsByTagName('td'))
+        .forEach((td) => {
+          let xo = td.innerHTML;
+
+          td.removeEventListener('click', handleCellClick);
+          for (let i = 0; i < modifiers.length; i++) {
+            xo = xo.replace(modifiers[i], '');
+          }
+
+          if (xo === which) {
+            td.classList.add('winning-side');
+          }
+        });
+    });
+  whoPlays.parentNode.removeChild(whoPlays);
+  trivia.scrollTop = trivia.scrollHeight;
 }
 
 function makeFace(type) {
