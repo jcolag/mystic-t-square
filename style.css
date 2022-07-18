@@ -1,7 +1,7 @@
 :root {
-  --background: #7dacc5;
-  --neutral: #f1ebd9;
-  --foreground: #49281b;
+  --background: #814730;
+  --neutral: #49281b;
+  --foreground: #f1ebd9;
 }
 
 body {
@@ -11,7 +11,13 @@ body {
   flex-direction: row;
   font-size: 1.25em;
   justify-content: center;
+  overflow: hidden;
   text-align: center;
+}
+
+button {
+  border-radius: 0.25em;
+  font-size: 0.9em;
 }
 
 div.hidden-modal {
@@ -47,6 +53,33 @@ td {
   height: 30vh;
   user-select: none;
   width: 30vh;
+}
+
+td.answering {
+	border: 0.25em solid var(--neutral);
+	height: calc(30vh - 0.5em);
+	width: calc(30vh - 0.5em);
+}
+
+td.empty {
+  opacity: 0.5;
+}
+
+.correct-answer {
+  border: 0.25em solid #7dc596;
+}
+
+.guessed-answer {
+  color: var(--foreground);
+  font-weight: bold;
+}
+
+.winning-side {
+  background-color: var(--neutral);
+}
+#who-plays {
+  font-size: 2em;
+  border-bottom: 1px solid var(--foreground);
 }
 
 .lds-grid {

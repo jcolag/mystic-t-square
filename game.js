@@ -72,7 +72,9 @@ function askQuestion(event) {
       panel.appendChild(answer);
     });
   trivia.appendChild(panel);
+  trivia.scrollTop = trivia.scrollHeight;
   answering = event.target;
+  answering.classList.add('answering');
   questionIndex++;
   nextTurn(false);
 }
@@ -90,7 +92,7 @@ function moveTile(event) {
 
   swapNodes(square, emptySquare);
   nextTurn(true);
-  checkWin(winState, loseState, 'O');
+  checkWin(winState, loseState);
 }
 
 function findNode(id) {
@@ -156,6 +158,13 @@ function swapNodes(n1, n2) {
   p2.insertBefore(n1, p2.children[i2]);
 }
 
+function forgetAnimation(event) {
+  const target = event.target;
+
+  target.removeEventListener('animationend', forgetAnimation);
+  target.classList.remove('animate__animated', 'animate__headShake');
+}
+
 function handleAnswerClick(event) {
   if (answering === null) {
     return;
@@ -185,9 +194,10 @@ function handleAnswerClick(event) {
       b.classList.add('guessed-answer');
     }
   });
+  answering.classList.remove('answering');
   answering = null;
   nextTurn(true);
-  checkWin(winState, loseState, 'O');
+  checkWin(winState, loseState);
 }
 
 function unescape(input) {
@@ -197,7 +207,7 @@ function unescape(input) {
   return doc.documentElement.textContent;
 }
 
-function checkWin(reportWin, reportTie, player) {
+function checkWin(reportWin, reportTie) {
   const map = [];
   const modifiers = [
     ...skin,
@@ -256,7 +266,7 @@ function checkWin(reportWin, reportTie, player) {
     .filter((v, i, s) => s.indexOf(v) === i);
 
   if (result.length > 0) {
-    reportWin(result, player);
+    reportWin(result);
   } else if (empties === 0) {
     reportTie();
   }
@@ -273,10 +283,11 @@ function loseState() {
   panel.appendChild(report);
   trivia.appendChild(panel);
   whoPlays.parentNode.removeChild(whoPlays);
+  trivia.scrollTop = trivia.scrollHeight;
 }
 
-function winState(result, player) {
   const which = result[0];
+function winState(result) {
   const whoPlays = document.getElementById('who-plays');
   const trivia = document.getElementById('right-panel');
   const panel = document.createElement('div');
