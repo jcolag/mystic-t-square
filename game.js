@@ -3,6 +3,11 @@ const faceYes = '🙆';
 const zwj = '\u200D';
 const skin = [ '🏻', '🏼', '🏽', '🏾', '🏿' ];
 const gender = [ '♀️', '♂️' ];
+const modifiers = [
+  ...skin,
+  ...gender,
+  zwj,
+];
 let questionIndex = 0;
 let questions = {};
 let answering = null;
@@ -209,11 +214,6 @@ function unescape(input) {
 
 function checkWin(reportWin, reportTie) {
   const map = [];
-  const modifiers = [
-    ...skin,
-    ...gender,
-    zwj,
-  ];
   let found = [];
   let empties = 0;
 
@@ -233,9 +233,7 @@ function checkWin(reportWin, reportTie) {
           }
         });
       for (let a = 0; a < 3; a++) {
-        for (let b = 0; b < modifiers.length; b++) {
-          row[a] = row[a].replace(modifiers[b], '');
-        }
+        row[a] = stripModifiers(row[a]);
       }
 
       map.push(row);
@@ -286,18 +284,14 @@ function loseState() {
   trivia.scrollTop = trivia.scrollHeight;
 }
 
-  const which = result[0];
 function winState(result) {
+  const which = stripModifiers(result[0]);
   const whoPlays = document.getElementById('who-plays');
   const trivia = document.getElementById('right-panel');
   const panel = document.createElement('div');
   const report = document.createTextNode(`${which} wins!`);
-  const modifiers = [
-    ...skin,
-    ...gender,
-    zwj,
-  ];
 
+  incrementStore(`gamesTo${which.indexOf('🙆') >= 0 ? 'O' : 'X'}`);
   panel.appendChild(report);
   trivia.appendChild(panel);
   Array.from(
@@ -310,10 +304,7 @@ function winState(result) {
           let xo = td.innerHTML;
 
           td.removeEventListener('click', handleCellClick);
-          for (let i = 0; i < modifiers.length; i++) {
-            xo = xo.replace(modifiers[i], '');
-          }
-
+          xo = stripModifiers(xo);
           if (xo === which) {
             td.classList.add('winning-side');
           }
@@ -332,6 +323,16 @@ function makeFace(type) {
     (s === skin.length ? '' : skin[s]) +
     (g === gender.length ? '' : (zwj + gender[g])) +
     '\uFE0F';
+}
+
+function stripModifiers(face) {
+  let result = face;
+
+  for (let i = 0; i < modifiers.length; i++) {
+    result = result.replace(modifiers[i], '');
+  }
+
+  return result;
 }
 
 function nextTurn(changePlayer) {
