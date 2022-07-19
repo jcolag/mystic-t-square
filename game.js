@@ -16,26 +16,56 @@ let playTurn = askQuestion;
 
 window.addEventListener('load', (e) => {
   const modal = document.getElementById('startup-modal');
+  let token = localStorage.getItem('apiToken');
+    token = openSession();
 
   Array.from(document.getElementsByTagName('td'))
     .forEach((cell) => cell.addEventListener('click', handleCellClick));
-  getQuestions(8);
+  questions = getQuestions(8, token);
   nextTurn(true);
   modal.classList.add('hidden-modal');
 });
 
-function getQuestions (n) {
+function getQuestions (n, token) {
   const request = new XMLHttpRequest();
-  
-  request.open('GET', `https://opentdb.com/api.php?amount=${n}`, false);
+  const tokenVar = token === null ? '' : `&token=${token}`;
+
+  request.open(
+    'GET',
+    `https://opentdb.com/api.php?amount=${n}${tokenVar}`,
+    false
+  );
   request.send(null);
 
   if (request.status !== 200) {
     alert('Problem with networking.');
     return;
   }
-  
-  questions = JSON.parse(request.responseText);
+
+  if (request.response_code === 3 || request.response_code === 4) {
+    token = openSession();
+    return getQuestions(n, token);
+  }
+
+  return JSON.parse(request.responseText);
+}
+
+function openSession() {
+  const request = new XMLHttpRequest();
+
+  request.open(
+    'GET',
+    'https://opentdb.com/api_token.php?command=request',
+    false
+  );
+  request.send(null);
+
+  if (request.status !== 200) {
+    alert('Problem with networking.');
+    return;
+  }
+
+  return JSON.parse(request.responseText).token;
 }
 
 function handleCellClick(event) {
