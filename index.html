@@ -12,8 +12,8 @@
   <title>Mystic T-Square</title>
 </head>
 <body>
-  <div id="left-panel">
-    <table>
+  <div class="panel" id="left-panel">
+    <table id="game-board">
       <tr>
         <td id="0-0"></td>
         <td id="1-0"></td>
@@ -21,7 +21,7 @@
       </tr>
       <tr>
         <td id="0-1"></td>
-        <td id="1-1"></td>
+        <td class="empty" id="1-1">❌</td>
         <td id="2-1"></td>
       </tr>
       <tr>
@@ -48,6 +48,47 @@
       <div></div>
       <div></div>
     </div>
+  </div>
+  <div class="modal hidden-modal" id="about-modal">
+    <h1>Mystic T-Square</h1>
+    <p>
+      Welcome to a simple two-player game, <b>Mystic T-Square</b>.  It
+      combines elements of
+      <a href="https://en.wikipedia.org/wiki/Tic-tac-toe">tic-tac-toe</a>,
+      <a href="https://en.wikipedia.org/wiki/Pub_quiz">trivia contests</a>,
+      and
+      <a href="https://en.wikipedia.org/wiki/15_puzzle">mystic squares</a>.
+    </p>
+    <p>
+      <i>Player #1</i> 🙆 chooses a square on one of the eight squares on
+      the grid&mdash;one square stays empty, crossed out ❌ and partly
+      transparent as a reminder&mdash;as if playing tic-tac-toe.  The
+      game will present Player #1 with a trivia question, which
+      determines who captures the square.
+    </p>
+    <p>
+      <i>Player #2</i> 🙅 slides one square into the empty position.
+    </p>
+    <p>
+      The first player to have tokens cover three squares in a row in
+      any direction&mdash;whether by adding a token or moving
+      one into position&mdash;wins.
+    </p>
+    <p>
+      Find the source code
+      <a href="https://github.com/jcolag/mystic-t-square">on GitHub</a>.
+    </p>
+    <hr>
+    <p>
+      Trivia questions come couresy of the
+      <a href="https://opentdb.com/">Open Trivia Database</i>,
+      made available under the terms of the
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative
+      Commons Attribution Share-Alike 4.0 International</a> license.
+    </p>
+    <p>
+      <button id="close-about">👍 Got it</button>
+    </p>
   </div>
 </body>
 </html>

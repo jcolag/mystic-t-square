@@ -16,11 +16,20 @@ let playTurn = askQuestion;
 
 window.addEventListener('load', (e) => {
   const modal = document.getElementById('startup-modal');
+  const about = document.getElementById('about-modal');
+  const openAbout = document.getElementById('help');
+  const closeAbout = document.getElementById('close-about');
   let token = localStorage.getItem('apiToken');
     token = openSession();
 
   Array.from(document.getElementsByTagName('td'))
     .forEach((cell) => cell.addEventListener('click', handleCellClick));
+  openAbout.addEventListener(
+    'click', () => about.classList.remove('hidden-modal')
+  );
+  closeAbout.addEventListener(
+    'click', () => about.classList.add('hidden-modal')
+  );
   questions = getQuestions(8, token);
   nextTurn(true);
   modal.classList.add('hidden-modal');

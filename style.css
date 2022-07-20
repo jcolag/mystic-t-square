@@ -77,6 +77,23 @@ td.empty {
 .winning-side {
   background-color: var(--neutral);
 }
+
+#about-modal,#config-modal,#stats-modal {
+  font-weight: normal;
+  height: 99.5vh;
+  overflow-y: scroll;
+  padding-top: 0;
+}
+
+#about-modal hr,#config-modal hr,#stats-modal hr {
+  width: 40%;
+}
+
+#about-modal p,#config-modal p,#stats-modal hr {
+  margin-left: 30%;
+  width: 40%;
+}
+
 #who-plays {
   font-size: 2em;
   border-bottom: 1px solid var(--foreground);
