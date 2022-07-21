@@ -90,6 +90,32 @@
       <button id="close-about">👍 Got it</button>
     </p>
   </div>
+  <div class="modal hidden-modal" id="config-modal">
+    <h1>Configuration</h1>
+    <p>
+      <input id="use-api-token" onclick="changeTokenUse(this)" type="checkbox">
+      <label for="use-api-token">Use Trivia API Session</label>
+      <br>
+      Our trivia source allows the game to prevent duplicated questions
+      during a &ldquo;session,&rdquo; allowing players to see a wider
+      variety of questions.  Note that, after six hours of inactivity,
+      they delete a session, so you will see duplicates from day to
+      day.  Also note that, since not every game uses its allotment
+      of questions, players might run out of questions sooner, if
+      they play for an extended period.
+    </p>
+    <hr>
+    <p>
+      <button id="reset-token" onclick="openSession()">Reset Session</button>
+      <br>
+      Abandon the existing trivia session and replace it for the next
+      game, by clicking this button.
+    </p>
+    <hr>
+    <p>
+      <button id="close-config">👍 Looks good</button>
+    </p>
+  </div>
 </body>
 </html>
 

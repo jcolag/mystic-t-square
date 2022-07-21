@@ -17,8 +17,11 @@ let playTurn = askQuestion;
 window.addEventListener('load', (e) => {
   const modal = document.getElementById('startup-modal');
   const about = document.getElementById('about-modal');
+  const config = document.getElementById('config-modal');
   const openAbout = document.getElementById('help');
   const closeAbout = document.getElementById('close-about');
+  const openConfig = document.getElementById('config');
+  const closeConfig = document.getElementById('close-config');
   let token = localStorage.getItem('apiToken');
     token = openSession();
 
@@ -29,6 +32,12 @@ window.addEventListener('load', (e) => {
   );
   closeAbout.addEventListener(
     'click', () => about.classList.add('hidden-modal')
+  );
+  openConfig.addEventListener(
+    'click', () => config.classList.remove('hidden-modal')
+  );
+  closeConfig.addEventListener(
+    'click', () => config.classList.add('hidden-modal')
   );
   questions = getQuestions(8, token);
   nextTurn(true);
