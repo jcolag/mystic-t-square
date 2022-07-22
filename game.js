@@ -13,6 +13,7 @@ let questions = {};
 let answering = null;
 let turn = -1;
 let playTurn = askQuestion;
+let useApiToken;
 
 window.addEventListener('load', (e) => {
   const modal = document.getElementById('startup-modal');
@@ -23,7 +24,14 @@ window.addEventListener('load', (e) => {
   const openConfig = document.getElementById('config');
   const closeConfig = document.getElementById('close-config');
   let token = localStorage.getItem('apiToken');
+  useApiToken = localStorage.getItem('useApiToken');
+  if (useApiToken !== null) {
+    useApiToken = true;
+    localStorage.setItem('useApiToken', useApiToken);
+  }
+
     token = openSession();
+    localStorage.setItem('apiToken', token);
 
   Array.from(document.getElementsByTagName('td'))
     .forEach((cell) => cell.addEventListener('click', handleCellClick));
@@ -62,6 +70,7 @@ function getQuestions (n, token) {
 
   if (request.response_code === 3 || request.response_code === 4) {
     token = openSession();
+    localStorage.setItem('apiToken', token);
     return getQuestions(n, token);
   }
 
