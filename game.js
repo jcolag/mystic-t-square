@@ -23,6 +23,7 @@ window.addEventListener('load', (e) => {
   const closeAbout = document.getElementById('close-about');
   const openConfig = document.getElementById('config');
   const closeConfig = document.getElementById('close-config');
+  const apiCheck = document.getElementById('use-api-token');
   let token = localStorage.getItem('apiToken');
   useApiToken = localStorage.getItem('useApiToken');
   if (useApiToken !== null) {
@@ -30,8 +31,16 @@ window.addEventListener('load', (e) => {
     localStorage.setItem('useApiToken', useApiToken);
   }
 
+  apiCheck.checked = useApiToken;
+  if (
+    useApiToken
+      && (
+        token === null
+      )
+  ) {
     token = openSession();
     localStorage.setItem('apiToken', token);
+  }
 
   Array.from(document.getElementsByTagName('td'))
     .forEach((cell) => cell.addEventListener('click', handleCellClick));
@@ -405,3 +414,10 @@ function nextTurn(changePlayer) {
     whoPlays.innerHTML = `${faceYes} - Answer the question`;
   }
 }
+
+
+function changeTokenUse(checkbox) {
+  useApiToken = checkbox.checked;
+  localStorage.setItem('useApiToken', useApiToken);
+}
+
