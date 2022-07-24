@@ -25,6 +25,8 @@ window.addEventListener('load', (e) => {
   const closeConfig = document.getElementById('close-config');
   const apiCheck = document.getElementById('use-api-token');
   let token = localStorage.getItem('apiToken');
+  let lastGame = localStorage.getItem('lastGame');
+
   useApiToken = localStorage.getItem('useApiToken');
   if (useApiToken !== null) {
     useApiToken = true;
@@ -36,10 +38,12 @@ window.addEventListener('load', (e) => {
     useApiToken
       && (
         token === null
+          || Date.now() - lastGame > 21600000
       )
   ) {
     token = openSession();
     localStorage.setItem('apiToken', token);
+    localStorage.setItem('lastGame', Date.now());
   }
 
   Array.from(document.getElementsByTagName('td'))
@@ -80,6 +84,7 @@ function getQuestions (n, token) {
   if (request.response_code === 3 || request.response_code === 4) {
     token = openSession();
     localStorage.setItem('apiToken', token);
+    localStorage.setItem('lastGame', Date.now());
     return getQuestions(n, token);
   }
 
