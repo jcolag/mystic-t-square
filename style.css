@@ -94,6 +94,13 @@ td.empty {
   width: 40%;
 }
 
+#admin-panel {
+  bottom: 0;
+  height: 3em;
+  position: absolute;
+  right: 0;
+}
+
 #who-plays {
   font-size: 2em;
   border-bottom: 1px solid var(--foreground);
