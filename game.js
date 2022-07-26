@@ -75,6 +75,7 @@ window.addEventListener('load', (e) => {
   questions = getQuestions(8, token);
   nextTurn(true);
   modal.classList.add('hidden-modal');
+  incrementStore('games');
 });
 
 function getQuestions (n, token) {
@@ -164,6 +165,7 @@ function askQuestion(event) {
   answering = event.target;
   answering.classList.add('answering');
   questionIndex++;
+  incrementStore('questionsAsked');
   nextTurn(false);
 }
 
@@ -179,6 +181,7 @@ function moveTile(event) {
   }
 
   swapNodes(square, emptySquare);
+  incrementStore('tilesMoved');
   nextTurn(true);
   checkWin(winState, loseState);
 }
@@ -267,8 +270,10 @@ function handleAnswerClick(event) {
 
   if (button.innerHTML === unescape(question.correct_answer)) {
     result = document.createTextNode(makeFace('O'));
+    incrementStore('questionsCorrect');
   } else {
     result = document.createTextNode(makeFace('X'));
+    incrementStore('questionsIncorrect');
   }
 
   answering.appendChild(result);
@@ -365,6 +370,7 @@ function loseState() {
   trivia.appendChild(panel);
   whoPlays.parentNode.removeChild(whoPlays);
   trivia.scrollTop = trivia.scrollHeight;
+  incrementStore('gameTies');
 }
 
 function winState(result) {
@@ -438,3 +444,18 @@ function changeTokenUse(checkbox) {
   localStorage.setItem('useApiToken', useApiToken);
 }
 
+function incrementStore(key) {
+  let value = localStorage.getItem(key);
+
+  if (value === null) {
+    value = 0;
+  } else {
+    value = Number(value);
+  }
+
+  if (!Number.isInteger(value)) {
+    return;
+  }
+
+  localStorage.setItem(key, value + 1);
+}
