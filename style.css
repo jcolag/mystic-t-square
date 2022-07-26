@@ -6,6 +6,7 @@
 
 body {
   background-color: var(--background);
+	background-image: url("/images/square_bg.png");
   color: var(--foreground);
   display: flex;
   flex-direction: row;
@@ -99,6 +100,11 @@ td.empty {
   height: 3em;
   position: absolute;
   right: 0;
+}
+
+#right-panel {
+  height: calc(97.5vh - 3em);;
+  overflow-y: auto;
 }
 
 #who-plays {
