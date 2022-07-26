@@ -19,10 +19,13 @@ window.addEventListener('load', (e) => {
   const modal = document.getElementById('startup-modal');
   const about = document.getElementById('about-modal');
   const config = document.getElementById('config-modal');
+  const stats = document.getElementById('stats-modal');
   const openAbout = document.getElementById('help');
   const closeAbout = document.getElementById('close-about');
   const openConfig = document.getElementById('config');
   const closeConfig = document.getElementById('close-config');
+  const openStats = document.getElementById('stats');
+  const closeStats = document.getElementById('close-stats');
   const apiCheck = document.getElementById('use-api-token');
   let token = localStorage.getItem('apiToken');
   let lastGame = localStorage.getItem('lastGame');
@@ -59,6 +62,15 @@ window.addEventListener('load', (e) => {
   );
   closeConfig.addEventListener(
     'click', () => config.classList.add('hidden-modal')
+  );
+  openStats.addEventListener(
+    'click', () => {
+      populateStats();
+      stats.classList.remove('hidden-modal');
+    }
+  );
+  closeStats.addEventListener(
+    'click', () => stats.classList.add('hidden-modal')
   );
   questions = getQuestions(8, token);
   nextTurn(true);
