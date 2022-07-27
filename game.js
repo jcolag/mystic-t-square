@@ -438,6 +438,24 @@ function nextTurn(changePlayer) {
   }
 }
 
+function populateStats() {
+  document.getElementById('games-played').innerHTML =
+    localStorage.getItem('games');
+  document.getElementById('games-to-X').innerHTML =
+    localStorage.getItem('gamesToX');
+  document.getElementById('games-to-y').innerHTML =
+    localStorage.getItem('gamesToO');
+  document.getElementById('games-tied').innerHTML =
+    localStorage.getItem('gameTies');
+  document.getElementById('questions-asked').innerHTML =
+    localStorage.getItem('questionsAsked');
+  document.getElementById('correct-answers').innerHTML =
+    localStorage.getItem('questionsCorrect');
+  document.getElementById('incorrect-answers').innerHTML =
+    localStorage.getItem('questionsIncorrect');
+  document.getElementById('tiles-moved').innerHTML =
+    localStorage.getItem('tilesMoved');
+}
 
 function changeTokenUse(checkbox) {
   useApiToken = checkbox.checked;
