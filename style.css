@@ -6,7 +6,7 @@
 
 body {
   background-color: var(--background);
-	background-image: url("/images/square_bg.png");
+	background-image: url("square_bg.png");
   color: var(--foreground);
   display: flex;
   flex-direction: row;
