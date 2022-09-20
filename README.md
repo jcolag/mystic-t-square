@@ -1,2 +1,5 @@
-# mystic-t-square
-A possible game
+# Mystic T-Square
+
+A (possible?) game.
+
+
