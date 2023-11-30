@@ -301,6 +301,49 @@ function unescape(input) {
 }
 
 function checkWin(reportWin, reportTie) {
+function loseState() {
+  const whoPlays = document.getElementById('who-plays');
+  const trivia = document.getElementById('right-panel');
+  const panel = document.createElement('div');
+  const report = document.createTextNode('A tie!');
+
+  panel.appendChild(report);
+  trivia.appendChild(panel);
+  whoPlays.parentNode.removeChild(whoPlays);
+  trivia.scrollTop = trivia.scrollHeight;
+  incrementStore('gameTies');
+}
+
+function winState(result) {
+  const which = stripModifiers(result[0]);
+  const whoPlays = document.getElementById('who-plays');
+  const trivia = document.getElementById('right-panel');
+  const panel = document.createElement('div');
+  const report = document.createTextNode(`${which} wins!`);
+
+  incrementStore(`gamesTo${which.indexOf('🙆') >= 0 ? 'O' : 'X'}`);
+  panel.appendChild(report);
+  trivia.appendChild(panel);
+  Array.from(
+      document.getElementById('game-board').getElementsByTagName('tr')
+    )
+    .forEach((tr) => {
+      Array
+        .from(tr.getElementsByTagName('td'))
+        .forEach((td) => {
+          let xo = td.innerHTML;
+
+          td.removeEventListener('click', handleCellClick);
+          xo = stripModifiers(xo);
+          if (xo === which) {
+            td.classList.add('winning-side');
+          }
+        });
+    });
+  whoPlays.parentNode.removeChild(whoPlays);
+  trivia.scrollTop = trivia.scrollHeight;
+}
+
   const map = [];
   let found = [];
   let empties = 0;
@@ -360,47 +403,6 @@ function checkWin(reportWin, reportTie) {
   return result;
 }
 
-function loseState() {
-  const whoPlays = document.getElementById('who-plays');
-  const trivia = document.getElementById('right-panel');
-  const panel = document.createElement('div');
-  const report = document.createTextNode('A tie!');
-
-  panel.appendChild(report);
-  trivia.appendChild(panel);
-  whoPlays.parentNode.removeChild(whoPlays);
-  trivia.scrollTop = trivia.scrollHeight;
-  incrementStore('gameTies');
-}
-
-function winState(result) {
-  const which = stripModifiers(result[0]);
-  const whoPlays = document.getElementById('who-plays');
-  const trivia = document.getElementById('right-panel');
-  const panel = document.createElement('div');
-  const report = document.createTextNode(`${which} wins!`);
-
-  incrementStore(`gamesTo${which.indexOf('🙆') >= 0 ? 'O' : 'X'}`);
-  panel.appendChild(report);
-  trivia.appendChild(panel);
-  Array.from(
-      document.getElementById('game-board').getElementsByTagName('tr')
-    )
-    .forEach((tr) => {
-      Array
-        .from(tr.getElementsByTagName('td'))
-        .forEach((td) => {
-          let xo = td.innerHTML;
-
-          td.removeEventListener('click', handleCellClick);
-          xo = stripModifiers(xo);
-          if (xo === which) {
-            td.classList.add('winning-side');
-          }
-        });
-    });
-  whoPlays.parentNode.removeChild(whoPlays);
-  trivia.scrollTop = trivia.scrollHeight;
 }
 
 function makeFace(type) {
