@@ -301,6 +301,18 @@ function unescape(input) {
 }
 
 function checkWin(reportWin, reportTie) {
+  const { map, empties } = mapFromBoard();
+  const result = calculateWinFromMap(map);
+
+  if (reportWin !== null && result.length > 0) {
+    reportWin(result);
+  } else if (reportTie !== null && empties === 0) {
+    reportTie();
+  }
+
+  return result;
+}
+
 function loseState() {
   const whoPlays = document.getElementById('who-plays');
   const trivia = document.getElementById('right-panel');
@@ -344,6 +356,7 @@ function winState(result) {
   trivia.scrollTop = trivia.scrollHeight;
 }
 
+function mapFromBoard() {
   const map = [];
   let found = [];
   let empties = 0;
