@@ -358,10 +358,9 @@ function winState(result) {
 
 function mapFromBoard() {
   const map = [];
-  let found = [];
   let empties = 0;
 
-  const rows = Array
+  Array
     .from(
       document.getElementById('game-board').getElementsByTagName('tr')
     )
@@ -382,6 +381,12 @@ function mapFromBoard() {
 
       map.push(row);
     });
+  return { map, empties };
+}
+
+function calculateWinFromMap(map) {
+  let found = [];
+
   for (let i = 0; i < 3; i++) {
     const row = map[i];
     const col = map.map((r) => r[i]);
