@@ -446,6 +446,108 @@ function nextTurn(changePlayer) {
   } else {
     whoPlays.innerHTML = `${faceYes} - Answer the question`;
   }
+function testSlides(map, empties, depth) {
+  const temp = '❌';
+  const location = {
+    x: -1,
+    y: -1,
+  };
+  const empty = {
+    losses: 0,
+    ties: 0,
+    wins: 0,
+  };
+  let up = empty, down = empty, left = empty, right = empty;
+
+  for (let j = 0; j < map.length; j++) {
+    for (let i = 0; i < map[j].length; i++) {
+      if (map[j][i] === temp) {
+        location.x = i;
+        location.y = j;
+      }
+    }
+  }
+
+  if (location.y > 0) {
+    const newMap = map.clone();
+
+    newMap[location.y][location.x] = newMap[location.y - 1][location.x];
+    newMap[location.y - 1][location.x] = temp;
+
+    const win = calculateWinFromMap(newMap);
+
+    if (win.length === 0) {
+      up = testAnswers(newMap, empties, depth + 1);
+    } else if (empties === 0) {
+      up.ties = 1;
+    } else if (win[0] === '🙅') {
+      up.wins = 1;
+    } else {
+      up.losses = 1;
+    }
+  }
+
+  if (location.y < map.length - 1) {
+    const newMap = map.clone();
+
+    newMap[location.y][location.x] = newMap[location.y + 1][location.x];
+    newMap[location.y + 1][location.x] = temp;
+
+    const win = calculateWinFromMap(newMap);
+
+    if (win.length === 0) {
+      down = testAnswers(newMap, empties, depth + 1);
+    } else if (empties === 0) {
+      down.ties = 1;
+    } else if (win[0] === '🙅') {
+      down.wins = 1;
+    } else {
+      down.losses = 1;
+    }
+  }
+
+  if (location.x > 0) {
+    const newMap = map.clone();
+
+    newMap[location.y][location.x] = newMap[location.y][location.x - 1];
+    newMap[location.y][location.x - 1] = temp;
+
+    const win = calculateWinFromMap(newMap);
+
+    if (win.length === 0) {
+      left = testAnswers(newMap, empties, depth + 1);
+    } else if (empties === 0) {
+      left.ties = 1;
+    } else if (win[0] === '🙅') {
+      left.wins = 1;
+    } else {
+      left.losses = 1;
+    }
+  }
+
+  if (location.x < map[0].length - 1) {
+    const newMap = map.clone();
+
+    newMap[location.y][location.x] = newMap[location.y][location.x + 1];
+    newMap[location.y][location.x + 1] = temp;
+
+    const win = calculateWinFromMap(newMap);
+
+    if (win.length === 0) {
+      right = testAnswers(newMap, empties, depth + 1);
+    } else if (empties === 0) {
+      right.ties = 1;
+    } else if (win[0] === '🙅') {
+      right.wins = 1;
+    } else {
+      right.losses = 1;
+    }
+  }
+
+  return { up, down, left, right };
+}
+
+function testAnswers(map, empties, depth) {
 }
 
 function populateStats() {
