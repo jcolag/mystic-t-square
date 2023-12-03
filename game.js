@@ -408,19 +408,9 @@ function calculateWinFromMap(map) {
     found.push(map[0][2]);
   }
 
-  const result = found
+  return found
     .filter((x) => x !== null && x.length > 0)
     .filter((v, i, s) => s.indexOf(v) === i);
-
-  if (result.length > 0) {
-    reportWin(result);
-  } else if (empties === 0) {
-    reportTie();
-  }
-
-  return result;
-}
-
 }
 
 function makeFace(type) {
