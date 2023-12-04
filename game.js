@@ -548,6 +548,79 @@ function testSlides(map, empties, depth) {
 }
 
 function testAnswers(map, empties, depth) {
+  const results = {
+    losses: 0,
+    ties: 0,
+    wins: 0,
+  };
+
+  if (depth > 2) {
+    return results;
+  }
+
+  for (let i = 0; i < map.length; i++) {
+    for (let j = 0; j < map[i].length; j++) {
+      if (map[i][j] === '') {
+        map[i][j] = '🙆️';
+        const o = calculateWinFromMap(map);
+
+        if (o.length === 0) {
+          const guess = testSlides(map, empties - 1, depth);
+
+          results.losses = results.losses
+            + guess.up.losses
+            + guess.down.losses
+            + guess.left.losses
+            + guess.right.losses;
+          results.ties = results.ties
+            + guess.up.ties
+            + guess.down.ties
+            + guess.left.ties
+            + guess.right.ties;
+          results.wins = results.wins
+            + guess.up.wins
+            + guess.down.wins
+            + guess.left.wins
+            + guess.right.wins;
+        } else if (empties === 1) {
+          results.ties += 1;
+        } else {
+          results.losses += 1;
+        }
+
+        map[i][j] = '🙅';
+        const x = calculateWinFromMap(map);
+
+        if (x.length === 0) {
+          const guess = testSlides(map, empties - 1, depth);
+
+          results.losses = results.losses
+            + guess.up.losses
+            + guess.down.losses
+            + guess.left.losses
+            + guess.right.losses;
+          results.ties = results.ties
+            + guess.up.ties
+            + guess.down.ties
+            + guess.left.ties
+            + guess.right.ties;
+          results.wins = results.wins
+            + guess.up.wins
+            + guess.down.wins
+            + guess.left.wins
+            + guess.right.wins;
+        } else if (empties === 1) {
+          results.ties += 1;
+        } else {
+          results.wins += 1;
+        }
+
+        map[i][j] = '';
+      }
+    }
+  }
+
+  return results;
 }
 
 function populateStats() {
