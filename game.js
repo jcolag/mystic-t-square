@@ -446,6 +446,32 @@ function nextTurn(changePlayer) {
   } else {
     whoPlays.innerHTML = `${faceYes} - Answer the question`;
   }
+
+  if (turn % 2 === 1) {
+    const { map, empties } = mapFromBoard();
+    console.log(testSlides(map, empties, 0));
+/*    const panel = document.getElementById('right-panel');
+    const box = document.createElement('div');
+    const text = document.createTextNode('Howdy!');
+    box.appendChild(text);
+    panel.appendChild(box);
+*/
+  }
+}
+
+Array.prototype.clone = function() {
+  let arr = [...Array(this.length)];
+  for (let i = 0; i < this.length; i++) {
+    if (this[i].clone) {
+      arr[i] = this[i].clone();
+    } else {
+      arr[i] = this[i];
+    }
+  }
+
+  return arr;
+}
+
 function testSlides(map, empties, depth) {
   const temp = '❌';
   const location = {
