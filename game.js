@@ -8,12 +8,21 @@ const modifiers = [
   ...gender,
   zwj,
 ];
+const temp = '❌';
+const emptyMap = [
+  [ '', '', '' ],
+  [ '', temp, '' ],
+  [ '', '', '' ],
+];
+const empties = emptyMap.flat().filter((c) => c === '').length;
+const slidesForState = {};
 let questionIndex = 0;
 let questions = {};
 let answering = null;
 let turn = -1;
 let playTurn = askQuestion;
 let useApiToken;
+let guide = {};
 
 window.addEventListener('load', (e) => {
   const modal = document.getElementById('startup-modal');
