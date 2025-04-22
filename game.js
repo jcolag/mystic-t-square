@@ -462,13 +462,6 @@ function nextTurn(changePlayer) {
 
   if (turn % 2 === 1) {
     const { map, empties } = mapFromBoard();
-    console.log(testSlides(map, empties, 0));
-/*    const panel = document.getElementById('right-panel');
-    const box = document.createElement('div');
-    const text = document.createTextNode('Howdy!');
-    box.appendChild(text);
-    panel.appendChild(box);
-*/
   }
 }
 
