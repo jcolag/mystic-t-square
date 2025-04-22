@@ -87,6 +87,10 @@ window.addEventListener('load', (e) => {
   incrementStore('games');
 });
 
+function signature(map) {
+  return map.map((row) => row.join('-')).join('|');
+}
+
 function getQuestions (n, token) {
   const request = new XMLHttpRequest();
   const tokenVar = token === null ? '' : `&token=${token}`;
