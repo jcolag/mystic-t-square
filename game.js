@@ -478,6 +478,32 @@ Array.prototype.clone = function() {
   return arr;
 }
 
+function slideDir(map, location, a, b, empties, temp, depth) {
+  const newMap = map.clone();
+  let dir = {
+    losses: 0,
+    ties: 0,
+    wins: 0,
+  };
+
+  newMap[location.y][location.x] = newMap[location.y + a][location.x + b];
+  newMap[location.y + a][location.x + b] = temp;
+
+  const win = calculateWinFromMap(newMap);
+
+  if (win.length === 0) {
+    dir = testAnswers(newMap, empties, depth + 1);
+  } else if (empties === 0) {
+    dir.ties = 1;
+  } else if (win[0] === '🙅') {
+    dir.wins = 1;
+  } else {
+    dir.losses = 1;
+  }
+
+  return dir;
+}
+
 function testSlides(map, empties, depth) {
   const temp = '❌';
   const location = {
