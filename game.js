@@ -527,60 +527,15 @@ function testSlides(map, empties, depth) {
   }
 
   if (location.y > 0) {
-    const newMap = map.clone();
-
-    newMap[location.y][location.x] = newMap[location.y - 1][location.x];
-    newMap[location.y - 1][location.x] = temp;
-
-    const win = calculateWinFromMap(newMap);
-
-    if (win.length === 0) {
-      up = testAnswers(newMap, empties, depth + 1);
-    } else if (empties === 0) {
-      up.ties = 1;
-    } else if (win[0] === '🙅') {
-      up.wins = 1;
-    } else {
-      up.losses = 1;
-    }
+    up = slideDir(map, location, -1, 0, empties, temp, depth);
   }
 
   if (location.y < map.length - 1) {
-    const newMap = map.clone();
-
-    newMap[location.y][location.x] = newMap[location.y + 1][location.x];
-    newMap[location.y + 1][location.x] = temp;
-
-    const win = calculateWinFromMap(newMap);
-
-    if (win.length === 0) {
-      down = testAnswers(newMap, empties, depth + 1);
-    } else if (empties === 0) {
-      down.ties = 1;
-    } else if (win[0] === '🙅') {
-      down.wins = 1;
-    } else {
-      down.losses = 1;
-    }
+    down = slideDir(map, location, 1, 0, empties, temp, depth);
   }
 
   if (location.x > 0) {
-    const newMap = map.clone();
-
-    newMap[location.y][location.x] = newMap[location.y][location.x - 1];
-    newMap[location.y][location.x - 1] = temp;
-
-    const win = calculateWinFromMap(newMap);
-
-    if (win.length === 0) {
-      left = testAnswers(newMap, empties, depth + 1);
-    } else if (empties === 0) {
-      left.ties = 1;
-    } else if (win[0] === '🙅') {
-      left.wins = 1;
-    } else {
-      left.losses = 1;
-    }
+    left = slideDir(map, location, 0, -1, empties, temp, depth);
   }
 
   if (location.x < map[0].length - 1) {
