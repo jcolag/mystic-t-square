@@ -510,12 +510,8 @@ function testSlides(map, empties, depth) {
     x: -1,
     y: -1,
   };
-  const empty = {
-    losses: 0,
-    ties: 0,
-    wins: 0,
-  };
-  let up = empty, down = empty, left = empty, right = empty;
+  let up = {}, down = {}, left = {}, right = {};
+
 
   for (let j = 0; j < map.length; j++) {
     for (let i = 0; i < map[j].length; i++) {
