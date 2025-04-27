@@ -540,24 +540,40 @@ function testSlides(map, empties, depth) {
     newMap[location.y][location.x] = newMap[location.y][location.x + 1];
     newMap[location.y][location.x + 1] = temp;
 
-    const win = calculateWinFromMap(newMap);
+function tryWithAnswer(map, empties, depth, results) {
+  const exist = (x) => x ? x : 0;
+  const o = calculateWinFromMap(map);
 
-    if (win.length === 0) {
-      right = testAnswers(newMap, empties, depth + 1);
-    } else if (empties === 0) {
-      right.ties = 1;
-    } else if (win[0] === '🙅') {
-      right.wins = 1;
-    } else {
-      right.losses = 1;
-    }
+  if (o.length === 0) {
+    const guess = testSlides(map, empties - 1, depth);
+
+    results.losses = results.losses
+      + exist(guess.up.losses)
+      + exist(guess.down.losses)
+      + exist(guess.left.losses)
+      + exist(guess.right.losses);
+    results.ties = results.ties
+      + exist(guess.up.ties)
+      + exist(guess.down.ties)
+      + exist(guess.left.ties)
+      + exist(guess.right.ties);
+    results.wins = results.wins
+      + exist(guess.up.wins)
+      + exist(guess.down.wins)
+      + exist(guess.left.wins)
+      + exist(guess.right.wins);
+  } else if (empties === 1) {
+    results.ties += 1;
+  } else {
+    results.losses += 1;
   }
 
-  return { up, down, left, right };
+  return results;
 }
 
-function testAnswers(map, empties, depth) {
-  const results = {
+function testAnswers(baseMap, empties, depth) {
+  const map = baseMap.clone();
+  let results = {
     losses: 0,
     ties: 0,
     wins: 0,
