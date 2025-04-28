@@ -535,10 +535,13 @@ function testSlides(map, empties, depth) {
   }
 
   if (location.x < map[0].length - 1) {
-    const newMap = map.clone();
+    right = slideDir(map, location, 0, 1, empties, temp, depth);
+  }
 
-    newMap[location.y][location.x] = newMap[location.y][location.x + 1];
-    newMap[location.y][location.x + 1] = temp;
+  const result = { up, down, left, right };
+  slidesForState[sig] = result;
+  return result;
+}
 
 function tryWithAnswer(map, empties, depth, results) {
   const exist = (x) => x ? x : 0;
