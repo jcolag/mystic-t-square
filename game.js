@@ -465,6 +465,51 @@ function nextTurn(changePlayer) {
   }
 }
 
+function chooseTile(input) {
+  const map = input.map;
+  const g = structuredClone(guide);
+  let dirs = [];
+  let x = -1;
+  let y = -1;
+
+  for (let j = 0; j < map.length; j++) {
+    for (let i = 0; i < map[j].length; i++) {
+      if (map[j][i] === temp) {
+        x = i;
+        y = j;
+      }
+    }
+  }
+
+  if (Object.keys(g.up).length > 0) {
+    g.up['dir'] = { x: 0, y: -1 };
+    dirs.push(g.up);
+  }
+  if (Object.keys(g.left).length > 0) {
+    g.left['dir'] = { x: -1, y: 0 };
+    dirs.push(g.left);
+  }
+  if (Object.keys(g.down).length > 0) {
+    g.down['dir'] = { x: 0, y: 1 };
+    dirs.push(g.down);
+  }
+  if (Object.keys(g.right).length > 0) {
+    g.right['dir'] = { x: 1, y: 0 };
+    dirs.push(g.right);
+  }
+
+  dirs = dirs.sort((a, b) => a.losses - b.losses);
+  x += dirs[0].dir.x;
+  y += dirs[0].dir.y;
+
+  const where = document.querySelector(`tr:nth-child(${y+1}) td:nth-child(${x+1})`);
+  const fakeEvent = {
+    target: where,
+  };
+
+  moveTile(fakeEvent);
+}
+
 Array.prototype.clone = function() {
   let arr = [...Array(this.length)];
   for (let i = 0; i < this.length; i++) {
