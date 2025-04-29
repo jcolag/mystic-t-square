@@ -512,6 +512,10 @@ function testSlides(map, empties, depth) {
   };
   let up = {}, down = {}, left = {}, right = {};
 
+  const sig = signature(map);
+  if (slidesForState[sig]) {
+    return slidesForState[sig];
+  }
 
   for (let j = 0; j < map.length; j++) {
     for (let i = 0; i < map[j].length; i++) {
