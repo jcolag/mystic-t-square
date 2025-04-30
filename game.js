@@ -145,7 +145,6 @@ function handleCellClick(event) {
 
 function askQuestion(event) {
   if (event.target.innerHTML.length > 0) {
-    console.log(event.target.innerHTML.length);
     return;
   }
 
