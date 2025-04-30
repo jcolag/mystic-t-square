@@ -22,6 +22,9 @@ let answering = null;
 let turn = -1;
 let playTurn = askQuestion;
 let useApiToken;
+let useAi;
+let lookahead;
+let style;
 let guide = {};
 
 window.addEventListener('load', (e) => {
