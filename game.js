@@ -364,7 +364,10 @@ function winState(result) {
           }
         });
     });
-  whoPlays.parentNode.removeChild(whoPlays);
+  if (whoPlays) {
+    whoPlays.parentNode.removeChild(whoPlays);
+  }
+
   trivia.scrollTop = trivia.scrollHeight;
 }
 
