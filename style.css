@@ -26,7 +26,7 @@ div.hidden-modal {
   z-index: -99 !important;
 }
 
-div.modal {
+dialog:modal {
   background-color: var(--foreground);
   color: var(--neutral);
   font-weight: bold;
