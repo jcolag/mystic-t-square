@@ -677,6 +677,21 @@ function changeTokenUse(checkbox) {
   localStorage.setItem('useApiToken', useApiToken);
 }
 
+function changeAIUse(checkbox) {
+  useAi = checkbox.checked;
+  localStorage.setItem('useAi', useAi);
+}
+
+function changeLookahead(slider) {
+  lookahead = slider.value;
+  localStorage.setItem('lookahead', lookahead);
+}
+
+function changeStyle(select) {
+  style = select.value;
+  localStorage.setItem('style', style);
+}
+
 function incrementStore(key) {
   let value = localStorage.getItem(key);
 
