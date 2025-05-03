@@ -64,25 +64,25 @@ window.addEventListener('load', (e) => {
   Array.from(document.getElementsByTagName('td'))
     .forEach((cell) => cell.addEventListener('click', handleCellClick));
   openAbout.addEventListener(
-    'click', () => about.classList.remove('hidden-modal')
+    'click', () => about.showModal()
   );
   closeAbout.addEventListener(
-    'click', () => about.classList.add('hidden-modal')
+    'click', () => about.close()
   );
   openConfig.addEventListener(
-    'click', () => config.classList.remove('hidden-modal')
+    'click', () => config.showModal()
   );
   closeConfig.addEventListener(
-    'click', () => config.classList.add('hidden-modal')
+    'click', () => config.close()
   );
   openStats.addEventListener(
     'click', () => {
       populateStats();
-      stats.classList.remove('hidden-modal');
+      stats.showModal();
     }
   );
   closeStats.addEventListener(
-    'click', () => stats.classList.add('hidden-modal')
+    'click', () => stats.close()
   );
   questions = getQuestions(8, token);
   nextTurn(true);
