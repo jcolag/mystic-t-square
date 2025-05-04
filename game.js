@@ -64,26 +64,37 @@ window.addEventListener('load', (e) => {
   Array.from(document.getElementsByTagName('td'))
     .forEach((cell) => cell.addEventListener('click', handleCellClick));
   openAbout.addEventListener(
-    'click', () => about.showModal()
-  );
+    'click', () => {
+    game.classList.add('blur');
+    about.showModal();
+  });
   closeAbout.addEventListener(
-    'click', () => about.close()
-  );
+    'click', () => {
+    game.classList.remove('blur');
+    about.close();
+  });
   openConfig.addEventListener(
-    'click', () => config.showModal()
-  );
+    'click', () => {
+    game.classList.add('blur');
+    config.showModal();
+  });
   closeConfig.addEventListener(
-    'click', () => config.close()
-  );
+    'click', () => {
+    game.classList.remove('blur');
+    config.close();
+  });
   openStats.addEventListener(
     'click', () => {
       populateStats();
+      game.classList.add('blur');
       stats.showModal();
     }
   );
   closeStats.addEventListener(
-    'click', () => stats.close()
-  );
+    'click', () => {
+    game.classList.remove('blur');
+    stats.close();
+  });
   questions = getQuestions(8, token);
   nextTurn(true);
   modal.classList.add('hidden-modal');
