@@ -468,7 +468,13 @@ function nextTurn(changePlayer) {
 
   if (changePlayer) {
     turn++;
-    playTurn = turn % 2 === 0 ? askQuestion : moveTile;
+    if (useAi) {
+      if (turn % 2 === 0) {
+        playTurn = askQuestion;
+      }
+    } else {
+      playTurn = turn % 2 === 0 ? askQuestion : moveTile;
+    }
     whoPlays.innerHTML = turn % 2 === 0
       ? `${faceYes} - Choose a square/question`
       : `${faceNo} - Slide a tile into the empty space`;
@@ -478,6 +484,10 @@ function nextTurn(changePlayer) {
 
   if (turn % 2 === 1) {
     const { map, empties } = mapFromBoard();
+    if (useAi) {
+      guide = testSlides(map, empties, 0);
+      chooseTile(mapFromBoard());
+    }
   }
 }
 
