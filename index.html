@@ -109,13 +109,77 @@
       of questions, players might run out of questions sooner, if
       they play for an extended period.
     </p>
-    <hr>
+    <div class="option-block">
+      <div>
+        <p>
+          <input id="use-api-token" onclick="changeTokenUse(this)" type="checkbox">
+          <label for="use-api-token">Use Trivia API Session</label>
+        </p>
+        <p>
+          Enable or disable OTDb sessions.
+        </p>
+      </div>
+      <div>
+        <p>
+          <button id="reset-token" onclick="openSession()">Reset Session</button>
+        </p>
+        <p>
+          Abandon the existing trivia session and replace it for the next
+          game by clicking this button.
+        </p>
+      </div>
+    </div>
+    <h2>Player 2 Bot</h2>
     <p>
-      <button id="reset-token" onclick="openSession()">Reset Session</button>
-      <br>
-      Abandon the existing trivia session and replace it for the next
-      game, by clicking this button.
+      By default, the second (tile-sliding) player runs automatically with
+      a primitive artificial intelligence.  Disable it for a two-player game
+      or configure it below.
     </p>
+    <div class="option-block">
+      <div>
+        <p>
+          <input id="use-ai" onclick="changeAIUse(this)" type="checkbox">
+          <label for="use-ai">AI Player 2</label>
+        </p>
+        <p>
+          Allow the computer to play for the second player.
+        </p>
+      </div>
+      <div>
+        <p>
+          <input
+            id="lookahead"
+            max="8"
+            min="1"
+            name="lookahead"
+            onchange="changeLookahead(this)"
+            type="range"
+          />
+          <br>
+          <label for="lookahead">Lookahead Depth (<span id="l-level">0</span>)</label>
+        </p>
+        <p>
+          Set the number of moves ahead that the AI can examine.
+        </p>
+      </div>
+      <div>
+        <p>
+          <select id="style" name="style" onchange="changeStyle(this)">
+            <option value="win">Win</option>
+            <option value="aloss">Avoid loss</option>
+            <option value="waloss">Win and Avoid loss</option>
+            <option value="tie">Tie</option>
+            <option value="lose">Lose</option>
+            <option value="awin">Avoid Win</option>
+            <option value="lawin">Lose or Avoid Win</option>
+          </select>
+        </p>
+        <p>
+          Determine how the AI should prefer playing.  It will try to pick moves
+          that increase the chances of the selected outcome.
+        </p>
+      </div>
+    </div>
     <hr>
     <p>
       <button id="close-config">👍 Looks good</button>
