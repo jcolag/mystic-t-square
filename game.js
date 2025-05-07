@@ -39,14 +39,36 @@ window.addEventListener('load', (e) => {
   const openStats = document.getElementById('stats');
   const closeStats = document.getElementById('close-stats');
   const apiCheck = document.getElementById('use-api-token');
+  const aiCheck = document.getElementById('use-ai');
+  const laLevel = document.getElementById('lookahead');
+  const laLabel = document.getElementById('l-level');
+  const playStyle = document.getElementById('style');
   let token = localStorage.getItem('apiToken');
   let lastGame = localStorage.getItem('lastGame');
 
   useApiToken = localStorage.getItem('useApiToken');
-  if (useApiToken !== null) {
-    useApiToken = true;
+  if (useApiToken === null) {
+    useApiToken = false;
     localStorage.setItem('useApiToken', useApiToken);
   }
+
+  useAi = localStorage.getItem('useAi');
+  if (useAi === null) {
+    useAi = true;
+    localStorage.setItem('useAi', useAi);
+  }
+
+  lookahead = localStorage.getItem('lookahead');
+  if (lookahead === null) {
+    lookahead = 8;
+  }
+  localStorage.setItem('lookahead', lookahead);
+
+  style = localStorage.getItem('style');
+  if (style === null) {
+    style = 1;
+  }
+  localStorage.setItem('style', style);
 
   apiCheck.checked = useApiToken;
   if (
