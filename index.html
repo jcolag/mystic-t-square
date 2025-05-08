@@ -12,33 +12,35 @@
   <title>Mystic T-Square</title>
 </head>
 <body>
-  <div class="panel" id="left-panel">
-    <table id="game-board">
-      <tr>
-        <td id="0-0"></td>
-        <td id="1-0"></td>
-        <td id="2-0"></td>
-      </tr>
-      <tr>
-        <td id="0-1"></td>
-        <td class="empty" id="1-1">❌</td>
-        <td id="2-1"></td>
-      </tr>
-      <tr>
-        <td id="0-2"></td>
-        <td id="1-2"></td>
-        <td id="2-2"></td>
-      </tr>
-    </table>
-  </div>
-  <div class="panel" id="right-panel">
-    <div id="who-plays">
+  <div id="game">
+    <div class="panel" id="left-panel">
+      <table id="game-board">
+        <tr>
+          <td id="0-0"></td>
+          <td id="1-0"></td>
+          <td id="2-0"></td>
+        </tr>
+        <tr>
+          <td id="0-1"></td>
+          <td class="empty" id="1-1">🧭</td>
+          <td id="2-1"></td>
+        </tr>
+        <tr>
+          <td id="0-2"></td>
+          <td id="1-2"></td>
+          <td id="2-2"></td>
+        </tr>
+      </table>
     </div>
-  </div>
-  <div class="panel" id="admin-panel">
-    <button id="help">❓ About</button>
-    <button id="config">⚙ Options</button>
-    <button id="stats">🧑‍🏫 Statistics</button>
+    <div class="panel" id="right-panel">
+      <div id="who-plays">
+      </div>
+    </div>
+    <div class="panel" id="admin-panel">
+      <button id="help">❓ About</button>
+      <button id="config">⚙ Options</button>
+      <button id="stats">🧑‍🏫 Statistics</button>
+    </div>
   </div>
   <div class="modal" id="startup-modal">
     Please wait&hellip;<br>

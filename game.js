@@ -8,7 +8,7 @@ const modifiers = [
   ...gender,
   zwj,
 ];
-const temp = '❌';
+const temp = '🧭';
 const emptyMap = [
   [ '', '', '' ],
   [ '', temp, '' ],
@@ -598,7 +598,6 @@ function slideDir(map, location, a, b, empties, temp, depth) {
 }
 
 function testSlides(map, empties, depth) {
-  const temp = '❌';
   const location = {
     x: -1,
     y: -1,
