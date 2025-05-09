@@ -28,6 +28,7 @@ let style;
 let guide = {};
 
 window.addEventListener('load', (e) => {
+  const game = document.getElementById('game');
   const modal = document.getElementById('startup-modal');
   const about = document.getElementById('about-modal');
   const config = document.getElementById('config-modal');
