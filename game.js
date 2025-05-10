@@ -84,6 +84,11 @@ window.addEventListener('load', (e) => {
     localStorage.setItem('lastGame', Date.now());
   }
 
+  aiCheck.checked = useAi;
+  laLevel.value = lookahead;
+  laLabel.innerText = lookahead.toString();
+  playStyle.value = style;
+
   Array.from(document.getElementsByTagName('td'))
     .forEach((cell) => cell.addEventListener('click', handleCellClick));
   openAbout.addEventListener(
