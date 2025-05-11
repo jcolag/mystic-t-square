@@ -76,24 +76,47 @@ td.empty {
   font-weight: bold;
 }
 
+.option-block {
+  display: table;
+}
+
+.option-block div {
+  border: 1px solid #7dc596;
+  display: table-row;
+}
+
+.option-block div p {
+  display: table-cell;
+  padding: 0.5em;
+  vertical-align: middle;
+}
+
 .winning-side {
   background-color: var(--neutral);
 }
 
 #about-modal,#config-modal,#stats-modal {
   font-weight: normal;
-  height: 99.5vh;
   overflow-y: scroll;
   padding-top: 0;
 }
 
 #about-modal hr,#config-modal hr,#stats-modal hr {
-  width: 40%;
+  width: 20vw;
 }
 
-#about-modal p,#config-modal p,#stats-modal hr {
-  margin-left: 30%;
-  width: 40%;
+#about-modal h2,#about-modal p,#stats-modal hr {
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%);
+  width: 40vw;
+}
+
+#config-modal div,#config-modal h1,#config-modal h2,#config-modal > p {
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%);
+  width: 40vw;
 }
 
 #admin-panel {
