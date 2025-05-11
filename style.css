@@ -44,6 +44,7 @@ dialog:modal {
 }
 
 div.panel {
+  display: table-cell;
   width: 50vw;
 }
 
@@ -100,6 +101,12 @@ td.empty {
   height: 3em;
   position: absolute;
   right: 0;
+}
+
+#game {
+  display: table;
+  height: 100%;
+  width: 100%;
 }
 
 #right-panel {
