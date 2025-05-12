@@ -2,6 +2,7 @@
   --background: #814730;
   --neutral: #49281b;
   --foreground: #f1ebd9;
+  --foregroundx: #f1ebd97f;
 }
 
 body {
@@ -64,7 +65,11 @@ td.answering {
 }
 
 td.empty {
-  opacity: 0.5;
+  background-color: var(--foregroundx);
+}
+
+.blur {
+  filter: blur(10px) saturate(33%);
 }
 
 .correct-answer {
