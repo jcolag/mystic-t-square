@@ -52,7 +52,7 @@ div.panel {
 td {
   background-color: var(--foreground);
   border-radius: 3vh;
-  font-size: 3em;
+  font-size: 5em;
   height: 30vh;
   user-select: none;
   width: 30vh;
