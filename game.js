@@ -519,6 +519,35 @@ function nextTurn(changePlayer) {
   }
 }
 
+function sortDirections(a, b) {
+  const vals = [ a.wins, a.losses, a.ties, b.wins, b.losses, b.ties ].sort();
+  const min = vals[0] + 1;
+  const aw = a.wins - min;
+  const al = a.losses - min;
+  const at = a.ties - min;
+  const bw = b.wins - min;
+  const bl = b.losses - min;
+  const bt = b.ties - min;
+
+  switch(style) {
+    case 'win':
+      return bw - aw;
+    case 'aloss':
+      return (al + bt) - (bl + at);
+    case 'waloss':
+      return (bw + bt) / bl - (aw + at) / al;
+    case 'tie':
+      return bt - at;
+    case 'lose':
+      return bl - al;
+    case 'awin':
+      return (aw + bt) - (bw + at);
+    case 'lawin':
+      return (bl + bt) / bw - (al + at) / aw;
+  }
+}
+
+
 function chooseTile(input) {
   const map = input.map;
   const g = structuredClone(guide);
@@ -552,7 +581,7 @@ function chooseTile(input) {
     dirs.push(g.right);
   }
 
-  dirs = dirs.sort((a, b) => a.losses - b.losses);
+  dirs = dirs.sort(sortDirections);
   x += dirs[0].dir.x;
   y += dirs[0].dir.y;
 
