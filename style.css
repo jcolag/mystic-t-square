@@ -110,7 +110,7 @@ td.empty {
   width: 20vw;
 }
 
-#about-modal h2,#about-modal p,#stats-modal hr {
+#about-modal h2,#about-modal p {
   left: 50%;
   position: relative;
   transform: translateX(-50%);
